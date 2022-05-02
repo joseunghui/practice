@@ -37,4 +37,6 @@ public class MemberFormDto {
 	private String street;
 	private String zipcode;
 
+
+
 }

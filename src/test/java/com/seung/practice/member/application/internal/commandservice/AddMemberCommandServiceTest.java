@@ -12,6 +12,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -31,7 +33,10 @@ class AddMemberCommandServiceTest {
         //given
         AddMemberCommand cmd = TestData.mockAddMemberCommand;
         Member member = TestData.mockMember;
-        given(memberRepository.findByMemberId(anyString())).willReturn(Lists.newArrayList());
+
+        // given(memberRepository.findByMemberId(anyString())).willReturn(Lists.newArrayList()); <- 이게 제인이 수정해주신 원문....
+        given(memberRepository.findByMemberId(anyString())).willReturn(Optional.empty());  // 맞나?
+
         //when
         Member actualMember = addMemberCommandService.addMember(cmd);
         //then

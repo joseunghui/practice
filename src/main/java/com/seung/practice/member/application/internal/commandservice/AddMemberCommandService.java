@@ -6,7 +6,7 @@ import com.seung.practice.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -17,15 +17,19 @@ public class AddMemberCommandService {
         validateDuplicateMember(command.getMemberId());
 
         Member member = new Member(command);
-        memberRepository.save(member); //JPA save 사용시 object return 받을 수 있음.
+
+        // memberRepository.save(member); JPA save 사용시 object return 받을 수 있음. -> OK
+        memberRepository.save(member);
+
         return member;
     }
 
 
     private void validateDuplicateMember(String memberId) {
-        //TODO: List로 찾을 이유 없음. Optional<Member>로 조회 하도록 수정해주세요
+        //TODO: List로 찾을 이유 없음. Optional<Member>로 조회 하도록 수정해주세요 -> OK
 
-        List<Member> findMembers = memberRepository.findByMemberId(memberId);
+        Optional<Member> findMembers = memberRepository.findByMemberId(memberId);
+
         if (!findMembers.isEmpty()) {
             throw new IllegalStateException("이미 사용 중인 아이디 입니다.");
         }

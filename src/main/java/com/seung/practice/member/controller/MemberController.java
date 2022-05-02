@@ -27,9 +27,8 @@ import static com.seung.practice.member.controller.constants.MemberWebUrl.ADD_ME
 @RequiredArgsConstructor
 public class MemberController {
 
-//	private final MemberService memberService;
 	private final AddMemberCommandService addMemberCommandService;
-//	private final MemberRepository memberRepository;
+//	private final MemberRepository memberRepository; -> 사용하지 않는게 비즈니스 로직 분리 가능
 
 	private final AddMemberMapper addMemberMapper;
 	private final PasswordEncoder pwEnc;
@@ -50,32 +49,8 @@ public class MemberController {
 	// 회원가입 실행
 	@PostMapping(ADD_MEMBER)
 	public ResponseEntity<String> create(@Valid @ModelAttribute("form") MemberFormDto form, BindingResult result, RedirectAttributes redirectAttributes) { // 검증을 위한 바인딩 추가
-		// 아이디 중복체크
-//		if (!memberRepository.findByMemberId(form.getMemberId()).isEmpty()) {
-//			result.reject("existsMemberId", "사용 중인 아이디 입니다.");
-//		}
 
 		//TODO: error 처리는 exception handler 사용 (구글링)
-//		// 검증에 실패하면 다시 가입화면으로
-//		if (result.hasErrors()) {
-//			return "members/createMember";
-//		}
-//
-//		Address address = new Address(form.getCity(), form.getStreet(), form.getZipcode());
-//
-//		// member 객체에 입력한 정보 담기
-//		Member member = new Member();
-//
-//		member.setMemberId(form.getMemberId());
-//		member.setPassword(form.getPassword());
-//		member.setName(form.getName());
-//
-//		member.setGender(form.getGender());
-//		member.setEmail(form.getEmail());
-//		member.setPhone(form.getPhone());
-//		member.setBirth(form.getBirth());
-//
-//		member.setAddress(address);
 
 		AddMemberCommand command = addMemberMapper.dtoToCommand(form, pwEnc);
 		// 가입 실행
