@@ -75,6 +75,7 @@ public class MemberController {
 	}
 
 
+	// headers 이용 에러 설정
 	protected HttpHeaders getSuccessHeaders() {
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("resultCode", "0000");

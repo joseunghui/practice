@@ -12,11 +12,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Mapper(config = MapstructConfig.class)
 public abstract class AddMemberMapper {
 
-
     @Mapping(target = "birth", ignore = true)
     @Mapping(target = "password", ignore = true)
     public abstract AddMemberCommand dtoToCommand(MemberFormDto dto, PasswordEncoder pwEnc);
-
 
     @AfterMapping
     protected void afterMappingToCommand(
