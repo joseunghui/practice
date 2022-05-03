@@ -29,9 +29,9 @@ public class LoginMemberCommandService implements UserDetailsService {
 	private void validateNonexistentMember(String memberId) {
 		Optional<Member> member = memberRepository.findByMemberId(memberId);
 
-		/*if (!member.isEmpty()) {
+		if (!member.isPresent()) {
 			throw new IllegalStateException("존재하지 않는 회원 아이디 입니다.");
-		}*/
+		}
 	}
 
 
