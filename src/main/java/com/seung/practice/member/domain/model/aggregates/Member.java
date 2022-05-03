@@ -4,6 +4,7 @@ import com.seung.practice.member.domain.model.commands.AddMemberCommand;
 import com.seung.practice.member.domain.model.entites.UserRoles;
 import com.seung.practice.member.domain.model.valueobjects.Address;
 import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,8 @@ import java.util.stream.Collectors;
 @Entity
 @Getter
 @NoArgsConstructor  //TODO : new Member() 부분이 많이 일단 추가. 꼭 필요한 경우에만 남김
+@AllArgsConstructor
+@Builder
 public class Member implements UserDetails {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;

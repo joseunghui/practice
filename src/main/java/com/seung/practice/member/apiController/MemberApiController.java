@@ -78,6 +78,7 @@ public class MemberApiController {
 		}
 		// 로그인 시 토큰 생성
 		jwtTokenProvider.createToken(member.get().getMemberId(), member.get().getRoles());
+		System.out.println("jwtTokenProvider = " + jwtTokenProvider);
 
 		return new ResponseEntity<Member>(
 				getSuccessHeaders(),

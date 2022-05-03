@@ -21,23 +21,24 @@ spring:
         format_sql: true
 
     # mail 전송 기능을 추가
-    spring:
-      mail:
-        host: smtp.gmail.com
-        port: 587
-        username: ex969634@gmail.com
-        password:
-        properties:
-          mail:
-            smtp:
-              auth: true
-              starttls:
-                enable: true
+    mail:
+      host: smtp.gmail.com
+      port: 587
+      username: ex969634@gmail.com
+      password:
+      properties:
+        mail:
+          smtp:
+            auth: true
+            starttls:
+              enable: true
 
     # 콘솔 확인 을 위한 always
     output:
         ansi:
             enabled: always
+
+
 # 파라미터 확인을 위한 trace
 logging.level:
         org.hibernate.SQL: debug

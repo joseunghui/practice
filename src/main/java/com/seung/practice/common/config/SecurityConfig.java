@@ -1,17 +1,19 @@
 package com.seung.practice.common.config;
 
+import com.seung.practice.common.filter.JwtAuthenticationFilter;
 import com.seung.practice.common.token.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFilter;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-@Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -20,10 +22,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.cors().disable()
-				.csrf().disable()
-				.formLogin().disable()
-				.headers().frameOptions().disable();
+		http.httpBasic().disable()  //  기본 설정 해제
+				.csrf().disable()       //  csrf 보안토큰 처리 해제
+				//  세션 사용하지 않음. (토큰 인증 기반)
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+				.and()
+				.addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
+						UsernamePasswordAuthenticationFilter.class);
 	}
 
 	// 비번 암호화해서 데이터베이스에 저장
@@ -41,4 +46,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
 	}
+
+
 }
