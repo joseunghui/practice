@@ -11,5 +11,5 @@ public class MemberWebUrl {
     public static final String MODIFY_MEMBER = "/api/members/modify";
 
 	// 회원 삭제
-    public static final String DELETE = "/api/members/delete";
+    public static final String DELETE_MEMBER = "/api/members/delete";
 }

@@ -24,8 +24,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
-import static com.seung.practice.member.controller.constants.MemberWebUrl.ADD_MEMBER;
-import static com.seung.practice.member.controller.constants.MemberWebUrl.LOGIN_MEMBER;
+import static com.seung.practice.member.controller.constants.MemberWebUrl.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -87,11 +86,24 @@ public class MemberApiController {
 
 
 	// 회원 수정 : modify
+	@PostMapping(MODIFY_MEMBER)
+	public ResponseEntity<Member> modify() {
 
+		return new ResponseEntity<Member>(
+				getSuccessHeaders(),
+				HttpStatus.OK);
+	}
 
 
 
 	// 회원 탈퇴 : delete
+	@PostMapping(DELETE_MEMBER)
+	public ResponseEntity<Member> delete() {
+
+		return new ResponseEntity<Member>(
+				getSuccessHeaders(),
+				HttpStatus.OK);
+	}
 
 
 
