@@ -1,6 +1,6 @@
 package com.seung.practice.member.controller.dto.mapper;
 
-import com.seung.practice.config.MapstructConfig;
+import com.seung.practice.common.config.MapstructConfig;
 import com.seung.practice.member.controller.dto.MemberFormDto;
 import com.seung.practice.member.domain.model.commands.AddMemberCommand;
 import org.mapstruct.AfterMapping;

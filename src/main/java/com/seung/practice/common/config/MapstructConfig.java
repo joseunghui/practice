@@ -1,4 +1,4 @@
-package com.seung.practice.config;
+package com.seung.practice.common.config;
 
 import org.mapstruct.MapperConfig;
 import org.mapstruct.ReportingPolicy;

@@ -1,6 +1,6 @@
 package com.seung.practice.member.controller.dto.mapper;
 
-import com.seung.practice.config.SecurityConfig;
+import com.seung.practice.common.config.SecurityConfig;
 import com.seung.practice.member.controller.dto.MemberFormDto;
 import com.seung.practice.member.domain.model.commands.AddMemberCommand;
 import com.seung.practice.testutil.TestData;

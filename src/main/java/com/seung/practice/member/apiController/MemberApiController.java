@@ -65,16 +65,15 @@ public class MemberApiController {
 		// 해당 회원 아이디 값으로 Member 가져오기
 		Optional<Member> member = loginMemberCommandService.loginMember(memberId);
 
-		// 암호화 된 비번이 입력한 비번과 동일한지 확인 ( pwEnc.matches() 사용함 )
-		boolean result = pwEnc.matches(password, pwEnc.encode(password));
-
-		if (result == true) {
-			return new ResponseEntity<Member>(
-					getSuccessHeaders(),
-					HttpStatus.OK);
+		// 암호화 된 비번이 입력한 비번과 동일한지 확인 ( pwEnc.matches() 사용 )
+		if (!pwEnc.matches(password, pwEnc.encode(password))) {
+			// TODO : 아이디 비번 불일치 -> 예외 처리 (?)
+			throw new IllegalStateException("잘못된 비밀번호 입니다.");
 		}
-		// TODO : 아이디 비번 불일치 -> 예외 처리 (?)
-		return null;
+
+		return new ResponseEntity<Member>(
+				getSuccessHeaders(),
+				HttpStatus.OK);
 	}
 
 
