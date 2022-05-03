@@ -32,6 +32,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return new BCryptPasswordEncoder();
 	}
 
+
+	/**
+	 * Token 사용
+	 */
 	@Bean // AuthenticationManager를 Bean으로 등록
 	@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception {

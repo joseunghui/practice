@@ -1,11 +1,13 @@
 package com.seung.practice.member.apiController;
 
+import com.seung.practice.common.token.JwtTokenProvider;
 import com.seung.practice.member.application.internal.commandservice.AddMemberCommandService;
 import com.seung.practice.member.application.internal.commandservice.LoginMemberCommandService;
 import com.seung.practice.member.controller.dto.MemberFormDto;
 import com.seung.practice.member.controller.dto.mapper.AddMemberMapper;
 import com.seung.practice.member.domain.model.aggregates.Member;
 import com.seung.practice.member.domain.model.commands.AddMemberCommand;
+import com.seung.practice.member.domain.model.entites.UserRoles;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.swing.text.html.Option;
 import javax.validation.Valid;
 
+import java.util.List;
 import java.util.Optional;
 
 import static com.seung.practice.member.controller.constants.MemberWebUrl.ADD_MEMBER;
@@ -31,9 +34,12 @@ public class MemberApiController {
 	private final AddMemberCommandService addMemberCommandService;
 	private final LoginMemberCommandService loginMemberCommandService;
 
-
+	// birth, password 때문에 사용
 	private final AddMemberMapper addMemberMapper;
 	private final PasswordEncoder pwEnc;
+
+	// Token 때문에 사용
+	private final JwtTokenProvider jwtTokenProvider;
 
 
 	// 회원가입 : add
@@ -70,6 +76,8 @@ public class MemberApiController {
 			// TODO : 아이디 비번 불일치 -> 예외 처리 (?)
 			throw new IllegalStateException("잘못된 비밀번호 입니다.");
 		}
+		// 로그인 시 토큰 생성
+		jwtTokenProvider.createToken(member.get().getMemberId(), member.get().getRoles());
 
 		return new ResponseEntity<Member>(
 				getSuccessHeaders(),
