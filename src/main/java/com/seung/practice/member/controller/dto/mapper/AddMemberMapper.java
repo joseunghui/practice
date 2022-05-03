@@ -9,21 +9,27 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+
 @Mapper(config = MapstructConfig.class)
 public abstract class AddMemberMapper {
 
     @Mapping(target = "birth", ignore = true)
     @Mapping(target = "password", ignore = true)
+
     public abstract AddMemberCommand dtoToCommand(MemberFormDto dto, PasswordEncoder pwEnc);
 
     @AfterMapping
     protected void afterMappingToCommand(
             @MappingTarget final AddMemberCommand.AddMemberCommandBuilder targetBuilder,
             MemberFormDto dto, PasswordEncoder pwEnc){
-        //TODO
-        //birth를 String으로 받아서 LocalDateTime으로 변환 하는 것을 해보면 좋겠다고 생각 했습니다.
-        //이곳에서 구현해 줍니다.
-        //AfterMapping 사용법은 구글링 하면 쉽게 찾을 수 있습니다.
+
+		// String 으로 입력받은 생년월일을 Date 로 변경해서 저장
+		targetBuilder.birth(LocalDateTime.from(LocalDate.parse(dto.getBirth()).atStartOfDay()));
+
+		// 비밀번호 암호화 상태로 저장
         targetBuilder.password(pwEnc.encode(dto.getPassword()));
     }
 }

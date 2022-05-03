@@ -28,8 +28,6 @@ import static com.seung.practice.member.controller.constants.MemberWebUrl.ADD_ME
 public class MemberController {
 
 	private final AddMemberCommandService addMemberCommandService;
-//	private final MemberRepository memberRepository; -> 사용하지 않는게 비즈니스 로직 분리 가능
-
 	private final AddMemberMapper addMemberMapper;
 	private final PasswordEncoder pwEnc;
 
@@ -48,10 +46,12 @@ public class MemberController {
 
 	// 회원가입 실행
 	@PostMapping(ADD_MEMBER)
-	public ResponseEntity<String> create(@Valid @ModelAttribute("form") MemberFormDto form, BindingResult result, RedirectAttributes redirectAttributes) { // 검증을 위한 바인딩 추가
+	public ResponseEntity<String> create(
+			@Valid @ModelAttribute("form") MemberFormDto form) { // 검증을 위한 바인딩 추가
 
 		//TODO: error 처리는 exception handler 사용 (구글링)
 
+		// 비밀번호 암호화해서 저장, 이메일 유효성 검증
 		AddMemberCommand command = addMemberMapper.dtoToCommand(form, pwEnc);
 		// 가입 실행
 		Member member = addMemberCommandService.addMember(command);

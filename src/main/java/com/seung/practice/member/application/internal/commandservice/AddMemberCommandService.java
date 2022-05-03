@@ -13,12 +13,12 @@ import java.util.Optional;
 public class AddMemberCommandService {
     private final MemberRepository memberRepository;
 
+	// 회원 가입
     public Member addMember(AddMemberCommand command){
         validateDuplicateMember(command.getMemberId());
 
         Member member = new Member(command);
 
-        // memberRepository.save(member); JPA save 사용시 object return 받을 수 있음. -> OK
         memberRepository.save(member);
 
         return member;
@@ -26,8 +26,6 @@ public class AddMemberCommandService {
 
 
     private void validateDuplicateMember(String memberId) {
-        //TODO: List로 찾을 이유 없음. Optional<Member>로 조회 하도록 수정해주세요 -> OK
-
         Optional<Member> findMembers = memberRepository.findByMemberId(memberId);
 
         if (!findMembers.isEmpty()) {
