@@ -18,9 +18,7 @@ public class AddMemberCommandService {
         validateDuplicateMember(command.getMemberId());
 
         Member member = new Member(command);
-
         memberRepository.save(member);
-
         return member;
     }
 

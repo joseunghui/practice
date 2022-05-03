@@ -20,8 +20,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
-import static com.seung.practice.member.controller.constants.MemberWebUrl.ADD_MEMBER;
+import java.net.URI;
 
+import static com.seung.practice.member.controller.constants.MemberWebUrl.ADD_MEMBER;
 
 @Controller
 @RequiredArgsConstructor
@@ -45,7 +46,8 @@ public class MemberController {
 	}
 
 	// 회원가입 실행
-	@PostMapping(ADD_MEMBER)
+	// @PostMapping(ADD_MEMBER)
+	@PostMapping("/members/create")
 	public ResponseEntity<String> create(
 			@Valid @ModelAttribute("form") MemberFormDto form) { // 검증을 위한 바인딩 추가
 
@@ -57,7 +59,8 @@ public class MemberController {
 		Member member = addMemberCommandService.addMember(command);
 
 		return new ResponseEntity<>(
-				"redirect:/",
+				"redirect:",
+				// getSuccessHeaders(),
 				getSuccessHeaders(),
 				HttpStatus.OK);
 	}
@@ -73,7 +76,6 @@ public class MemberController {
 	public String login() {
 		return "";
 	}
-
 
 	// headers 이용 에러 설정
 	protected HttpHeaders getSuccessHeaders() {

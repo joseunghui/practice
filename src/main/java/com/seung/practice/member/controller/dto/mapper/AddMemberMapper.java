@@ -12,7 +12,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-
 @Mapper(config = MapstructConfig.class)
 public abstract class AddMemberMapper {
 
