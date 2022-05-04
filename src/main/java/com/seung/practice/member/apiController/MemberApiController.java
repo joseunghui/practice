@@ -63,6 +63,7 @@ public class MemberApiController {
 	// 로그인 : login
 	@PostMapping(LOGIN_MEMBER)
 	public ResponseEntity<Member> login(
+			// parameter 값으로 아이디, 패스워드를 가져오기? 아니면 Model 로??
 			@RequestParam("memberId") String memberId,
 			@RequestParam("password") String password) {
 
