@@ -21,7 +21,6 @@ public class LoginMemberCommandService implements UserDetailsService {
 		validateNonexistentMember(memberId);
 
 		Optional<Member> member = memberRepository.findByMemberId(memberId);
-
 		return member;
 	}
 

@@ -30,6 +30,7 @@ import static com.seung.practice.member.controller.constants.MemberWebUrl.*;
 @RequiredArgsConstructor
 public class MemberApiController {
 
+	// 각 로직 별 Service 의존관계 주입
 	private final AddMemberCommandService addMemberCommandService;
 	private final LoginMemberCommandService loginMemberCommandService;
 
@@ -77,7 +78,6 @@ public class MemberApiController {
 		}
 		// 로그인 시 토큰 생성
 		jwtTokenProvider.createToken(member.get().getMemberId(), member.get().getRoles());
-
 
 		return new ResponseEntity<Member>(
 				getSuccessHeaders(),
