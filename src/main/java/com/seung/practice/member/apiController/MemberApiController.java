@@ -3,6 +3,7 @@ package com.seung.practice.member.apiController;
 import com.seung.practice.common.token.JwtTokenProvider;
 import com.seung.practice.member.application.internal.commandservice.AddMemberCommandService;
 import com.seung.practice.member.application.internal.commandservice.LoginMemberCommandService;
+import com.seung.practice.member.application.snsLogin.kakao.KakaoApiService;
 import com.seung.practice.member.controller.dto.MemberFormDto;
 import com.seung.practice.member.controller.dto.mapper.AddMemberMapper;
 import com.seung.practice.member.domain.model.aggregates.Member;
@@ -13,17 +14,16 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.swing.text.html.Option;
 import javax.validation.Valid;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
+import static com.seung.practice.member.controller.constants.KaKaoApiUrl.KAKAO;
 import static com.seung.practice.member.controller.constants.MemberWebUrl.*;
 
 @RestController
@@ -33,6 +33,7 @@ public class MemberApiController {
 	// 각 로직 별 Service 의존관계 주입
 	private final AddMemberCommandService addMemberCommandService;
 	private final LoginMemberCommandService loginMemberCommandService;
+	private final KakaoApiService kakaoApiService;
 
 	// birth, password 때문에 사용
 	private final AddMemberMapper addMemberMapper;
@@ -84,6 +85,32 @@ public class MemberApiController {
 				getSuccessHeaders(),
 				HttpStatus.OK);
 	}
+
+	// sns-login : kakao
+	/**
+	 *	url : https://kauth.kakao.com/oauth/authorize
+	 *	보낼 파라미터 : code(String code, "code")
+	 */
+	@RequestMapping(value = KAKAO, method = RequestMethod.GET)
+	public ResponseEntity<HashMap> kakaoLogin(@RequestParam(value = "code", required = false) String code) throws Exception {
+
+		String access_Token = kakaoApiService.getAccessToken(code);
+		HashMap<String, Object> userInfo = kakaoApiService.getUserInfo(access_Token);
+
+		return new ResponseEntity<>(
+				userInfo,
+				getSuccessHeaders(),
+				HttpStatus.OK);
+	}
+/*
+	@RequestMapping(value="/kakaoLogin", method=RequestMethod.GET)
+	public String kakaoLogin(@RequestParam(value = "code", required = false) String code) throws Exception {
+		String access_Token = ms.getAccessToken(code);
+		HashMap<String, Object> userInfo = ms.getUserInfo(access_Token);
+		return "member/testPage";
+	}
+*/
+
 
 
 	// 회원 수정 : modify
