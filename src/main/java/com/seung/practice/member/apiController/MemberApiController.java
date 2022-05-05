@@ -33,7 +33,6 @@ public class MemberApiController {
 	// 각 로직 별 Service 의존관계 주입
 	private final AddMemberCommandService addMemberCommandService;
 	private final LoginMemberCommandService loginMemberCommandService;
-	private final KakaoApiService kakaoApiService;
 
 	// birth, password 때문에 사용
 	private final AddMemberMapper addMemberMapper;
@@ -85,32 +84,6 @@ public class MemberApiController {
 				getSuccessHeaders(),
 				HttpStatus.OK);
 	}
-
-	// sns-login : kakao
-	/**
-	 *	url : https://kauth.kakao.com/oauth/authorize
-	 *	보낼 파라미터 : code(String code, "code")
-	 */
-	@RequestMapping(value = KAKAO, method = RequestMethod.GET)
-	public ResponseEntity<HashMap> kakaoLogin(@RequestParam(value = "code", required = false) String code) throws Exception {
-
-		String access_Token = kakaoApiService.getAccessToken(code);
-		HashMap<String, Object> userInfo = kakaoApiService.getUserInfo(access_Token);
-
-		return new ResponseEntity<>(
-				userInfo,
-				getSuccessHeaders(),
-				HttpStatus.OK);
-	}
-/*
-	@RequestMapping(value="/kakaoLogin", method=RequestMethod.GET)
-	public String kakaoLogin(@RequestParam(value = "code", required = false) String code) throws Exception {
-		String access_Token = ms.getAccessToken(code);
-		HashMap<String, Object> userInfo = ms.getUserInfo(access_Token);
-		return "member/testPage";
-	}
-*/
-
 
 
 	// 회원 수정 : modify
