@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Builder
 @ToString
 public class ModifyMemberCommand {
-	// 회원 아이디는 변경 불가
+	private String memberId;
 	private String password;
 	private String name;
 	private String phone;

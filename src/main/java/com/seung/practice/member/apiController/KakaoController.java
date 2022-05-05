@@ -28,7 +28,7 @@ public class KakaoController {
 	 *	보낼 파라미터 : code(String code, "code")
 	 */
 	@RequestMapping(value = KAKAO, method = RequestMethod.GET)
-	public ResponseEntity<HashMap> kakaoLogin(@RequestParam(value = "code", required = false) String code) throws Exception {
+	public ResponseEntity<HashMap> kakaoLogin(@RequestParam(value = "code", required = false) String code) {
 
 		String access_Token = kakaoApiService.getAccessToken(code);
 		HashMap<String, Object> userInfo = kakaoApiService.getUserInfo(access_Token);
@@ -38,14 +38,6 @@ public class KakaoController {
 				getSuccessHeaders(),
 				HttpStatus.OK);
 	}
-/*
-	@RequestMapping(value="/kakaoLogin", method=RequestMethod.GET)
-	public String kakaoLogin(@RequestParam(value = "code", required = false) String code) throws Exception {
-		String access_Token = ms.getAccessToken(code);
-		HashMap<String, Object> userInfo = ms.getUserInfo(access_Token);
-		return "member/testPage";
-	}
-*/
 
 
 	// headers 이용 에러 설정

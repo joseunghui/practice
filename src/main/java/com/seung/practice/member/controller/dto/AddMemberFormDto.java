@@ -11,7 +11,7 @@ import javax.validation.constraints.Pattern;
 
 @Getter @Setter
 @Builder
-public class MemberFormDto { // 검증용 dto
+public class AddMemberFormDto { // 회원 가입 검증용 dto
 
 	@NotBlank(message = "아이디는 필수 입니다.")
 	private String memberId;
@@ -36,7 +36,4 @@ public class MemberFormDto { // 검증용 dto
 	private String city;
 	private String street;
 	private String zipcode;
-
-
-
 }

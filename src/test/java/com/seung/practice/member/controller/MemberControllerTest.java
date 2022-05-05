@@ -1,7 +1,7 @@
 package com.seung.practice.member.controller;
 
 import com.seung.practice.member.application.internal.commandservice.AddMemberCommandService;
-import com.seung.practice.member.controller.dto.MemberFormDto;
+import com.seung.practice.member.controller.dto.AddMemberFormDto;
 import com.seung.practice.member.controller.dto.mapper.AddMemberMapper;
 import com.seung.practice.member.domain.model.aggregates.Member;
 import com.seung.practice.member.domain.model.commands.AddMemberCommand;
@@ -56,7 +56,7 @@ class MemberControllerTest {
     @DisplayName("회원을 성공적으로 생성 한다.")
     void createMember() throws Exception {
         //given
-        MemberFormDto form = TestData.mockMemberFormDto;
+        AddMemberFormDto form = TestData.mockAddMemberFormDto;
         String mockFormData = TestData.MockMemberFormString;
         AddMemberCommand cmd = TestData.mockAddMemberCommand;
         Member member = TestData.mockMember;

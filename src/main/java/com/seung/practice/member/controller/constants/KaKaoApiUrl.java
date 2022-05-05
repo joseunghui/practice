@@ -20,12 +20,12 @@ public class KaKaoApiUrl {
 	 * 카카오 엑세스 토큰 검증 URL
 	 * https://kapi.kakao.com/user/access_token_info
 	 */
-	public static final String KAPI_CHECK_ACCESS_TOKEN_URL = "https://kapi.kakao.com/user/access_token_info";
+	public static final String KAPI_CHECK_ACCESS_TOKEN_URL = "https://kapi.kakao.com/v1/user/access_token_info";
 
 	/**
 	 * 카카오 회원 정보 조회 URL
 	 * https://kapi.kakao.com/user/me
 	 */
-	public static final String KAPI_USER_INFO_URL = "https://kapi.kakao.com/user/me";
+	public static final String KAPI_USER_INFO_URL = "https://kapi.kakao.com/v2/user/me";
 
 }

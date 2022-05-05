@@ -1,6 +1,7 @@
 package com.seung.practice.member.domain.model.aggregates;
 
 import com.seung.practice.member.domain.model.commands.AddMemberCommand;
+import com.seung.practice.member.domain.model.commands.ModifyMemberCommand;
 import com.seung.practice.member.domain.model.entites.UserRoles;
 import com.seung.practice.member.domain.model.valueobjects.Address;
 import com.sun.istack.NotNull;
@@ -53,6 +54,17 @@ public class Member implements UserDetails {
 
 
 	public Member(AddMemberCommand command){
+		this.memberId = command.getMemberId();
+		this.password = command.getPassword();
+		this.name = command.getName();
+		this.phone = command.getPhone();
+		this.email = command.getEmail();
+		this.gender = command.getGender();
+		this.birth = command.getBirth();
+		this.address = new Address(command.getCity(), command.getStreet(), command.getZipcode());
+	}
+
+	public Member(ModifyMemberCommand command) {
 		this.memberId = command.getMemberId();
 		this.password = command.getPassword();
 		this.name = command.getName();

@@ -1,11 +1,11 @@
 package com.seung.practice.testutil;
 
-import com.seung.practice.member.controller.dto.MemberFormDto;
+import com.seung.practice.member.controller.dto.AddMemberFormDto;
 import com.seung.practice.member.domain.model.aggregates.Member;
 import com.seung.practice.member.domain.model.commands.AddMemberCommand;
 
 public class TestData {
-    public static MemberFormDto mockMemberFormDto = MemberFormDto.builder()
+    public static AddMemberFormDto mockAddMemberFormDto = AddMemberFormDto.builder()
             .memberId("test123")
             .password("!23Qwe")
             .name("테스터")
@@ -16,13 +16,13 @@ public class TestData {
             .build();
 
     public static AddMemberCommand mockAddMemberCommand = AddMemberCommand.builder()
-            .memberId(mockMemberFormDto.getMemberId())
-            .password(mockMemberFormDto.getPassword())
-            .name(mockMemberFormDto.getName())
-            .phone(mockMemberFormDto.getPhone())
-            .city(mockMemberFormDto.getCity())
-            .street(mockMemberFormDto.getStreet())
-            .zipcode(mockMemberFormDto.getZipcode())
+            .memberId(mockAddMemberFormDto.getMemberId())
+            .password(mockAddMemberFormDto.getPassword())
+            .name(mockAddMemberFormDto.getName())
+            .phone(mockAddMemberFormDto.getPhone())
+            .city(mockAddMemberFormDto.getCity())
+            .street(mockAddMemberFormDto.getStreet())
+            .zipcode(mockAddMemberFormDto.getZipcode())
             .build();
 
     public static Member mockMember = new Member(mockAddMemberCommand);

@@ -1,7 +1,7 @@
 package com.seung.practice.member.controller.dto.mapper;
 
 import com.seung.practice.common.config.SecurityConfig;
-import com.seung.practice.member.controller.dto.MemberFormDto;
+import com.seung.practice.member.controller.dto.AddMemberFormDto;
 import com.seung.practice.member.domain.model.commands.AddMemberCommand;
 import com.seung.practice.testutil.TestData;
 import org.junit.jupiter.api.DisplayName;
@@ -34,10 +34,10 @@ class AddMemberMapperTest {
     private  PasswordEncoder passwordEncoder;
 
     @Test
-    @DisplayName("MemberFormDto To Command 매핑")
+    @DisplayName("AddMemberFormDto To Command 매핑")
     void dtoToCmd(){
         //given
-        MemberFormDto dto = TestData.mockMemberFormDto;
+        AddMemberFormDto dto = TestData.mockAddMemberFormDto;
 
         //when
         AddMemberCommand cmd = mapper.dtoToCommand(dto, passwordEncoder);
