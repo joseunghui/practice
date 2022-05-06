@@ -4,6 +4,7 @@ import com.seung.practice.common.token.JwtTokenProvider;
 import com.seung.practice.member.application.internal.commandservice.AddMemberCommandService;
 import com.seung.practice.member.application.internal.commandservice.LoginMemberCommandService;
 import com.seung.practice.member.application.internal.commandservice.ModifyMemberCommandService;
+import com.seung.practice.member.application.service.MemberService;
 import com.seung.practice.member.controller.dto.AddMemberFormDto;
 import com.seung.practice.member.controller.dto.ModifyMemberFormDto;
 import com.seung.practice.member.controller.dto.mapper.AddMemberMapper;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+import java.util.List;
 import java.util.Optional;
 
 import static com.seung.practice.member.controller.constants.MemberWebUrl.*;
@@ -29,6 +31,7 @@ import static com.seung.practice.member.controller.constants.MemberWebUrl.*;
 public class MemberApiController {
 
 	// 각 로직 별 Service 의존관계 주입
+	private final MemberService memberService;
 	private final AddMemberCommandService addMemberCommandService;
 	private final LoginMemberCommandService loginMemberCommandService;
 	private final ModifyMemberCommandService modifyMemberCommandService;
@@ -120,6 +123,21 @@ public class MemberApiController {
 				HttpStatus.OK);
 	}
 
+
+	// 회원 조회(전체 목록 조회)
+	@GetMapping("/api/members")
+	public ResponseEntity<List<Member>> list() {
+
+		// 전체 회원 조회
+		List<Member> memberList = memberService.memberFindAll();
+
+		return new ResponseEntity(
+				memberList,
+				getSuccessHeaders(),
+				HttpStatus.OK);
+	}
+
+	// 회원 조회(아이디로 조회)
 
 
 
