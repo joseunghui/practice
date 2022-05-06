@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +21,9 @@ public class MemberService {
     }
 
 
-
-
+    // 회원 아이디로 조회
+    public Member memberFindOne(String memberId) {
+        Optional<Member> member = memberRepository.findByMemberId(memberId);
+        return member.get();
+    }
 }

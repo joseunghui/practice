@@ -17,20 +17,13 @@ public class LoginMemberCommandService implements UserDetailsService {
 
 	// 로그인
 	public Optional<Member> loginMember(String memberId) {
+		Optional<Member> member = memberRepository.findByMemberId(memberId);
+
 		// 검증 -> 존재하지 않는 아이디
-		validateNonexistentMember(memberId);
-
-		Optional<Member> member = memberRepository.findByMemberId(memberId);
-		return member;
-	}
-
-	// 검증 -> 존재하지 않는 아이디
-	private void validateNonexistentMember(String memberId) {
-		Optional<Member> member = memberRepository.findByMemberId(memberId);
-
 		if (!member.isPresent()) {
 			throw new IllegalStateException("존재하지 않는 회원 아이디 입니다.");
 		}
+		return member;
 	}
 
 
