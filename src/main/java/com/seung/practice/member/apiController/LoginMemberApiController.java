@@ -62,7 +62,7 @@ public class LoginMemberApiController {
     // sns-login : kakao
     /**
      *	url : https://kauth.kakao.com/oauth/authorize
-     *	보낼 파라미터 : code(String code, "code")
+     *	보낼 파라미터 : code(String code -> "code")
      */
     @RequestMapping(value = KAKAO, method = RequestMethod.GET)
     public ResponseEntity<HashMap> kakaoLogin(@RequestParam(value = "code", required = false) String code) {
