@@ -61,7 +61,7 @@ public class LoginMemberApiController {
 
 
 
-    // sns-login
+    // sns-login : kakao
 	/**
 	 * url : https://kauth.kakao.com/oauth/authorize
 	 * 보낼 파라미터 : client_id, redirect_uri, response_type( = "code")
