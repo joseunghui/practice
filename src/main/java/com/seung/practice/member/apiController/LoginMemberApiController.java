@@ -12,9 +12,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import static com.seung.practice.member.controller.constants.KaKaoApiUrl.KAKAO;
+import static com.seung.practice.member.controller.constants.KaKaoApiUrl.KAKAO_LOGIN;
 import static com.seung.practice.member.controller.constants.MemberWebUrl.LOGIN_MEMBER;
 
 @RestController
@@ -60,21 +62,22 @@ public class LoginMemberApiController {
 
 
     // sns-login : kakao
-    /**
-     *	url : https://kauth.kakao.com/oauth/authorize
-     *	보낼 파라미터 : code(String code -> "code")
-     */
-    @RequestMapping(value = KAKAO, method = RequestMethod.GET)
-    public ResponseEntity<HashMap> kakaoLogin(@RequestParam(value = "code", required = false) String code) {
 
-        String access_Token = kakaoApiService.getAccessToken(code);
-        HashMap<String, Object> userInfo = kakaoApiService.getUserInfo(access_Token);
+	/**
+	 * url : https://kauth.kakao.com/oauth/authorize
+	 * 보낼 파라미터 : client_id, redirect_uri, response_type( = "code")
+	 */
+	@GetMapping("/oauth")
+	public ResponseEntity<HashMap> kakaoLogin(@RequestParam String code) {
+		String access_Token = kakaoApiService.getAccessToken(code);
+		HashMap<String, Object> userInfo = kakaoApiService.getUserInfo(access_Token);
 
-        return new ResponseEntity<>(
-                userInfo,
-                getSuccessHeaders(),
-                HttpStatus.OK);
-    }
+		return new ResponseEntity<>(
+				userInfo,
+				getSuccessHeaders(),
+				HttpStatus.OK);
+	}
+
 
 
 

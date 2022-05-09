@@ -7,6 +7,7 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Map;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -23,7 +24,6 @@ public class KakaoApiService {
 
 		try {
 			URL url = new URL(reqURL);
-			System.out.println("url = " + url);
 
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("POST");
@@ -33,14 +33,16 @@ public class KakaoApiService {
 			StringBuilder sb = new StringBuilder();
 
 			sb.append("grant_type=authorization_code");
-			sb.append("&client_id=06d10003dd20ec495b490aa91138d1e9"); // 발급받은 REST_API키
-			sb.append("&redirect_uri=http://localhost:8080/oauth/snsLogin/kakaoAPI/login"); // kakao-application 에서 내가 설정한 주소
+			sb.append("&client_id=2de428c9c364d86e906883533d6d0bf1"); // 발급받은 REST_API키
+			sb.append("&redirect_uri=http://localhost:8080/oauth"); // kakao-application 에서 내가 설정한 주소
 			sb.append("&code=" + authorize_code);
 
 			bw.write(sb.toString());
 			bw.flush();
-
+			
+/*			확인 코드
 			int responseCode = conn.getResponseCode();
+			System.out.println("responseCode-1 : " + responseCode);*/
 
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String line = "";
@@ -56,9 +58,6 @@ public class KakaoApiService {
 			access_Token = element.getAsJsonObject().get("access_token").getAsString();
 			refresh_Token = element.getAsJsonObject().get("refresh_token").getAsString();
 
-			System.out.println("access_token : " + access_Token);
-			System.out.println("refresh_token : " + refresh_Token);
-
 			br.close();
 			bw.close();
 
@@ -68,23 +67,20 @@ public class KakaoApiService {
 		return access_Token;
 	}
 
-
-
-
 	public HashMap<String, Object> getUserInfo(String access_token) {
 
-		HashMap<String, Object> userInfo = new HashMap<String, Object>();
-		String reqURL = KaKaoApiUrl.KAPI_CHECK_ACCESS_TOKEN_URL;
+		HashMap<String, Object> userInfo = new HashMap<>();
+		String reqURL = KaKaoApiUrl.KAPI_USER_INFO_URL;
 
 		try {
 			URL url = new URL(reqURL);
-
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-			conn.setRequestMethod("GET");
+			conn.setRequestMethod("POST");
 			conn.setRequestProperty("Authorization", "Bearer " + access_token);
 
+/*			확인 코드
 			int responseCode = conn.getResponseCode();
+			System.out.println("responseCode-2 : " + responseCode);*/
 
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String line = "";
@@ -95,23 +91,22 @@ public class KakaoApiService {
 			}
 
 			JsonParser parser = new JsonParser();
-
 			JsonElement element = parser.parse(result);
-			// JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
-			JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
 
-			// String nickname = properties.getAsJsonObject().get("nickname").getAsString();
-			String email = kakao_account.getAsJsonObject().get("email").getAsString();
+//			JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
+//			JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
 
-			// System.out.println("nickname = " + nickname);
+			String id = element.getAsJsonObject().get("id").getAsString();
+//			String nickname = properties.getAsJsonObject().get("nickname").getAsString();
+//			String email = kakao_account.getAsJsonObject().get("email").getAsString();
 
-			// userInfo.put("nickname", nickname);
-			userInfo.put("email", email);
+			userInfo.put("id", id);
+//			userInfo.put("nickname", nickname);
+//			userInfo.put("email", email);
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 		return userInfo;
 	}
 
