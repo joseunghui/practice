@@ -50,11 +50,11 @@ public class LoginMemberApiController {
             throw new IllegalStateException("잘못된 비밀번호 입니다.");
         }
         // 로그인 시 토큰 생성
-        jwtTokenProvider.createToken(member.get().getMemberId(), member.get().getRoles());
+        // jwtTokenProvider.createToken(member.get().getMemberId(), member.get().getRoles());
         // TODO - 이 토큰 처리를 어떻게 해야할지...
 
         return new ResponseEntity<>(
-                "login-Success",
+				jwtTokenProvider.createToken(member.get().getMemberId(), member.get().getRoles()),
                 getSuccessHeaders(),
                 HttpStatus.OK);
     }
@@ -76,8 +76,6 @@ public class LoginMemberApiController {
 				getSuccessHeaders(),
 				HttpStatus.OK);
 	}
-
-
 
 
 
