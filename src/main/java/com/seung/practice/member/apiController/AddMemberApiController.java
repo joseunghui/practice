@@ -33,9 +33,6 @@ public class AddMemberApiController {
     @PostMapping(ADD_MEMBER)
     public ResponseEntity create(
             @Valid @ModelAttribute("form") AddMemberFormDto form) {
-
-        //TODO: error 처리는 exception handler 사용 (구글링)
-
         // 비밀번호 암호화해서 저장, 생년월일 타입 변경
         AddMemberCommand command = addMemberMapper.dtoToCommand(form, pwEnc);
         // 가입 실행

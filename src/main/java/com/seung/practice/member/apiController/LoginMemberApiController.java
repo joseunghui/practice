@@ -1,5 +1,7 @@
 package com.seung.practice.member.apiController;
 
+import com.seung.practice.common.exceptions.ErrorCode;
+import com.seung.practice.common.exceptions.MemberException;
 import com.seung.practice.common.token.JwtTokenProvider;
 import com.seung.practice.member.application.internal.commandservice.LoginMemberCommandService;
 import com.seung.practice.member.application.snsLogin.kakao.KakaoApiService;
@@ -46,20 +48,18 @@ public class LoginMemberApiController {
 
         // 암호화 된 비번이 입력한 비번과 동일한지 확인 ( pwEnc.matches() 사용 )
         if (!pwEnc.matches(password, pwEnc.encode(password))) {
-            // TODO : 아이디 비번 불일치 -> 예외 처리 (?)
-            throw new IllegalStateException("잘못된 비밀번호 입니다.");
+			throw new MemberException(ErrorCode.PASSWORD_NOT_MATCH);
         }
+
         // 로그인 시 토큰 생성
         // jwtTokenProvider.createToken(member.get().getMemberId(), member.get().getRoles());
-        // TODO - 이 토큰 처리를 어떻게 해야할지...
+        // TODO - 토큰 사용..????
 
         return new ResponseEntity<>(
 				jwtTokenProvider.createToken(member.get().getMemberId(), member.get().getRoles()),
                 getSuccessHeaders(),
                 HttpStatus.OK);
     }
-
-
 
     // sns-login : kakao
 	/**
@@ -76,8 +76,6 @@ public class LoginMemberApiController {
 				getSuccessHeaders(),
 				HttpStatus.OK);
 	}
-
-
 
     // headers 이용 에러 설정
     protected HttpHeaders getSuccessHeaders() {

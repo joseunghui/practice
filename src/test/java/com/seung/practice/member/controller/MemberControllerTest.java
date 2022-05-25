@@ -1,5 +1,6 @@
 package com.seung.practice.member.controller;
 
+import com.seung.practice.exception.ApiExceptionHandler;
 import com.seung.practice.member.application.internal.commandservice.AddMemberCommandService;
 import com.seung.practice.member.controller.dto.AddMemberFormDto;
 import com.seung.practice.member.controller.dto.mapper.AddMemberMapper;
@@ -47,7 +48,7 @@ class MemberControllerTest {
         this.mockMvc = MockMvcBuilders
                 .standaloneSetup(memberController)
                 .addFilters(new CharacterEncodingFilter("UTF-8", true))
-//                .setControllerAdvice(ApiExceptionHandler.class)
+                .setControllerAdvice(ApiExceptionHandler.class)
                 .alwaysDo(print())
                 .build();
     }

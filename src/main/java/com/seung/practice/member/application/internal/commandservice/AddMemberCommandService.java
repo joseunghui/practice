@@ -1,5 +1,7 @@
 package com.seung.practice.member.application.internal.commandservice;
 
+import com.seung.practice.common.exceptions.ErrorCode;
+import com.seung.practice.common.exceptions.MemberException;
 import com.seung.practice.member.domain.model.aggregates.Member;
 import com.seung.practice.member.domain.model.commands.AddMemberCommand;
 import com.seung.practice.member.repository.MemberRepository;
@@ -27,7 +29,8 @@ public class AddMemberCommandService {
         Optional<Member> findMembers = memberRepository.findByMemberId(memberId);
 
         if (!findMembers.isEmpty()) {
-            throw new IllegalStateException("이미 사용 중인 아이디 입니다.");
+			// MemberException 에서 이미 존재하는 회원 에러 : USER_EXISTS
+			throw new MemberException(ErrorCode.USER_EXISTS);
         }
     }
 }

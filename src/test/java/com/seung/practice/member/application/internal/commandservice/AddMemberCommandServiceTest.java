@@ -33,16 +33,22 @@ class AddMemberCommandServiceTest {
         //given
         AddMemberCommand cmd = TestData.mockAddMemberCommand;
         Member member = TestData.mockMember;
-
         // given(memberRepository.findByMemberId(anyString())).willReturn(Lists.newArrayList()); <- 이게 제인이 수정해주신 원문....
-        given(memberRepository.findByMemberId(anyString())).willReturn(Optional.empty());  // 맞나?
-
+        given(memberRepository.findByMemberId(anyString())).willReturn(Optional.empty());
         //when
         Member actualMember = addMemberCommandService.addMember(cmd);
         //then
         assertAll(
-                ()-> assertThat(actualMember.getMemberId()).isEqualTo(member.getMemberId())
-                //TODO 나머지 필드 값도 확인 한다.
+                () -> assertThat(actualMember.getMemberId()).isEqualTo(member.getMemberId()),
+				() -> assertThat(actualMember.getPassword()).isEqualTo(member.getPassword()),
+				() -> assertThat(actualMember.getName()).isEqualTo(member.getName()),
+				() -> assertThat(actualMember.getEmail()).isEqualTo(member.getEmail()),
+				() -> assertThat(actualMember.getBirth()).isEqualTo(member.getBirth()),
+				() -> assertThat(actualMember.getGender()).isEqualTo(member.getGender()),
+				() -> assertThat(actualMember.getPhone()).isEqualTo(member.getPhone()),
+				() -> assertThat(actualMember.getAddress().getStreet()).isEqualTo(member.getAddress().getStreet()),
+				() -> assertThat(actualMember.getAddress().getCity()).isEqualTo(member.getAddress().getCity()),
+				() -> assertThat(actualMember.getAddress().getZipcode()).isEqualTo(member.getAddress().getZipcode())
         );
     }
 

@@ -10,6 +10,9 @@ public class TestData {
             .password("!23Qwe")
             .name("테스터")
             .phone("010-1234-5678")
+			.birth("2000-01-01")
+			.email("aaa@gmail.com")
+			.gender("male")
             .city("서울")
             .street("성수1가")
             .zipcode("12345")
@@ -27,5 +30,11 @@ public class TestData {
 
     public static Member mockMember = new Member(mockAddMemberCommand);
 
-    public static String MockMemberFormString = "memberId=test123&password=!23Qwe&name=테스터&phone=010-1234-5678&city=서울&street=성수1가&zipcode=12345";
+    public static String MockMemberFormString = "memberId=test123&password=!23Qwe&name=테스터&phone=010-1234-5678&birth=2000-01-01&email=aaa@gmail.com&gender=male&city=서울&street=성수1가&zipcode=12345";
+
+
+
+
+
+
 }

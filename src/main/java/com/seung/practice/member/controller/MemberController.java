@@ -45,8 +45,6 @@ public class MemberController {
 	public ResponseEntity<String> create(
 			@Valid @ModelAttribute("form") AddMemberFormDto form) { // 검증을 위한 바인딩 추가
 
-		//TODO: error 처리는 exception handler 사용 (구글링)
-
 		// 비밀번호 암호화해서 저장, 이메일 유효성 검증
 		AddMemberCommand command = addMemberMapper.dtoToCommand(form, pwEnc);
 		// 가입 실행

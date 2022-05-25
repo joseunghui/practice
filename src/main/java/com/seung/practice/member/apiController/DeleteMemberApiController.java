@@ -1,5 +1,7 @@
 package com.seung.practice.member.apiController;
 
+import com.seung.practice.common.exceptions.ErrorCode;
+import com.seung.practice.common.exceptions.MemberException;
 import com.seung.practice.member.application.internal.commandservice.DeleteMemberCommandService;
 import com.seung.practice.member.domain.model.aggregates.Member;
 import lombok.RequiredArgsConstructor;
@@ -39,7 +41,7 @@ public class DeleteMemberApiController {
 
         // 암호화 된 비번이 입력한 비번과 동일한지 확인 ( pwEnc.matches() 사용 )
         if (!pwEnc.matches(password, pwEnc.encode(password))) {
-            throw new IllegalStateException("잘못된 비밀번호 입니다.");
+			throw new MemberException(ErrorCode.PASSWORD_NOT_MATCH);
         }
 
         // 삭제 실행

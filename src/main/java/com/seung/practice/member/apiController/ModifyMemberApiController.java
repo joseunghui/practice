@@ -35,8 +35,6 @@ public class ModifyMemberApiController {
     public ResponseEntity modify(
             @Valid @ModelAttribute("form") ModifyMemberFormDto form) {
 
-        //TODO: error 처리는 exception handler 사용 (구글링)
-
         // 회원 정보 수정 전 우선확인 사항
         modifyMemberCommandService.getMember(form.getMemberId());
 
