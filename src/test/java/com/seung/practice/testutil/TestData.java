@@ -7,7 +7,7 @@ import com.seung.practice.member.domain.model.commands.AddMemberCommand;
 public class TestData {
     public static AddMemberFormDto mockAddMemberFormDto = AddMemberFormDto.builder()
             .memberId("test123")
-            .password("!23Qwe")
+            .password("!23Qwe12345")
             .name("테스터")
             .phone("010-1234-5678")
 			.birth("2000-01-01")
