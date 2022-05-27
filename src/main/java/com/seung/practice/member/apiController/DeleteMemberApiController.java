@@ -40,17 +40,17 @@ public class DeleteMemberApiController {
         Optional<Member> member = deleteMemberCommandService.getMember(memberId);
 
         // 암호화 된 비번이 입력한 비번과 동일한지 확인 ( pwEnc.matches() 사용 )
-        if (!pwEnc.matches(password, pwEnc.encode(password))) {
+        if (!pwEnc.matches(password, member.get().getPassword())) {
 			throw new MemberException(ErrorCode.PASSWORD_NOT_MATCH);
-        }
+        } else {
+			// 삭제 실행
+			deleteMemberCommandService.deleteMember(member);
 
-        // 삭제 실행
-        deleteMemberCommandService.deleteMember(member);
-
-        return new ResponseEntity<>(
-                "delete-Success",
-                getSuccessHeaders(),
-                HttpStatus.OK);
+			return new ResponseEntity<>(
+					"delete-Success",
+					getSuccessHeaders(),
+					HttpStatus.OK);
+		}
     }
 
     // headers 이용 에러 설정

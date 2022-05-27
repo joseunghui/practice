@@ -20,7 +20,6 @@ public class LoginMemberCommandService implements UserDetailsService {
 	// 로그인
 	public Optional<Member> loginMember(String memberId) {
 		Optional<Member> member = memberRepository.findByMemberId(memberId);
-		System.out.println("memberId = " + memberId);
 
 		// 검증 -> 존재하지 않는 아이디
 		if (!member.isPresent()) {
