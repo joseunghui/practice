@@ -17,20 +17,19 @@ public class AddMemberCommandService {
 
 	// 회원 가입
     public Member addMember(AddMemberCommand command){
-        validateDuplicateMember(command.getMemberId());
+		// 중복회원 검증
+        validateDuplicateMember(command);
 
         Member member = new Member(command);
         memberRepository.save(member);
+		
         return member;
     }
-
-
-    private void validateDuplicateMember(String memberId) {
-        Optional<Member> findMembers = memberRepository.findByMemberId(memberId);
-
-        if (!findMembers.isEmpty()) {
-			// MemberException 에서 이미 존재하는 회원 에러 : USER_EXISTS
+	
+	// 중복 회원 검증
+    private void validateDuplicateMember(AddMemberCommand command) {
+        memberRepository.findByMemberId(command.getMemberId()).ifPresent(m ->{
 			throw new MemberException(ErrorCode.USER_EXISTS);
-        }
+		});
     }
 }

@@ -1,10 +1,10 @@
 package com.seung.practice.member.application.internal.commandservice;
 
+import com.seung.practice.common.exceptions.MemberException;
 import com.seung.practice.member.domain.model.aggregates.Member;
 import com.seung.practice.member.domain.model.commands.AddMemberCommand;
 import com.seung.practice.member.repository.MemberRepository;
 import com.seung.practice.testutil.TestData;
-import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,8 +33,10 @@ class AddMemberCommandServiceTest {
         //given
         AddMemberCommand cmd = TestData.mockAddMemberCommand;
         Member member = TestData.mockMember;
-        // given(memberRepository.findByMemberId(anyString())).willReturn(Lists.newArrayList()); <- 이게 제인이 수정해주신 원문....
+
+        // given(memberRepository.findByMemberId(anyString())).willReturn(Lists.newArrayList()); <- 이게 원문....
         given(memberRepository.findByMemberId(anyString())).willReturn(Optional.empty());
+
         //when
         Member actualMember = addMemberCommandService.addMember(cmd);
         //then
@@ -55,6 +57,13 @@ class AddMemberCommandServiceTest {
     @Test
     @DisplayName("중복 회원 ID로 생성에 실패 한다.")
     void addMemberDuplicatedError(){
-        //TODO test case 구현 :유닛테스트에서 Exception을 처리 하는 방법을 구글링 해서 추가 하세요.
+		//given
+		AddMemberCommand cmd1 = TestData.mockAddMemberCommand;
+		AddMemberCommand cmd2 = TestData.mockAddMemberCommand;
+		given(memberRepository.findByMemberId(anyString())).willReturn(Optional.empty());
+
+		addMemberCommandService.addMember(cmd1);
+
+		assertThrows(MemberException.class, () -> addMemberCommandService.addMember(cmd2));
     }
 }

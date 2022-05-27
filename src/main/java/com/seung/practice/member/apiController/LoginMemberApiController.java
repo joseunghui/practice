@@ -41,24 +41,18 @@ public class LoginMemberApiController {
             @RequestParam("memberId") String memberId,
             @RequestParam("password") String password) {
 
-        // TODO: error 처리는 exception handler 사용 (구글링)
-
         // 해당 회원 아이디 값으로 Member 가져오기
         Optional<Member> member = loginMemberCommandService.loginMember(memberId);
 
         // 암호화 된 비번이 입력한 비번과 동일한지 확인 ( pwEnc.matches() 사용 )
-        if (!pwEnc.matches(password, pwEnc.encode(password))) {
+        if (!pwEnc.matches(password, member.get().getPassword())) {
 			throw new MemberException(ErrorCode.PASSWORD_NOT_MATCH);
-        }
-
-        // 로그인 시 토큰 생성
-        // jwtTokenProvider.createToken(member.get().getMemberId(), member.get().getRoles());
-        // TODO - 토큰 사용..????
-
-        return new ResponseEntity<>(
+		}
+		return new ResponseEntity<>(
 				jwtTokenProvider.createToken(member.get().getMemberId(), member.get().getRoles()),
-                getSuccessHeaders(),
-                HttpStatus.OK);
+				getSuccessHeaders(),
+				HttpStatus.OK);
+
     }
 
     // sns-login : kakao

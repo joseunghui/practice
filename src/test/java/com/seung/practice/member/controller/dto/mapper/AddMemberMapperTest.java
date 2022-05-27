@@ -33,6 +33,7 @@ class AddMemberMapperTest {
     @Autowired
     private  PasswordEncoder passwordEncoder;
 
+
     @Test
     @DisplayName("AddMemberFormDto To Command 매핑")
     void dtoToCmd(){
@@ -44,8 +45,11 @@ class AddMemberMapperTest {
         //then
         assertAll(
                 ()->assertThat(cmd.getMemberId()).isEqualTo(dto.getMemberId()),
-                ()->assertThat(cmd.getPassword()).startsWith("$2a$10$"),
+                ()->assertThat(cmd.getPassword()).startsWith("$2a$10$"), // salt 가 일치하는지 확인
                 ()->assertThat(cmd.getName()).isEqualTo(dto.getName()),
+                ()->assertThat(cmd.getEmail()).isEqualTo(dto.getEmail()),
+                ()->assertThat(cmd.getBirth()).isEqualTo(dto.getBirth()),
+                ()->assertThat(cmd.getGender()).isEqualTo(dto.getGender()),
                 ()->assertThat(cmd.getPhone()).isEqualTo(dto.getPhone()),
                 ()->assertThat(cmd.getCity()).isEqualTo(dto.getCity()),
                 ()->assertThat(cmd.getStreet()).isEqualTo(dto.getStreet()),

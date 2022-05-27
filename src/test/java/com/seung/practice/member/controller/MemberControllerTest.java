@@ -1,6 +1,6 @@
 package com.seung.practice.member.controller;
 
-import com.seung.practice.exception.ApiExceptionHandler;
+import com.seung.practice.common.exceptions.MemberException;
 import com.seung.practice.member.application.internal.commandservice.AddMemberCommandService;
 import com.seung.practice.member.controller.dto.AddMemberFormDto;
 import com.seung.practice.member.controller.dto.mapper.AddMemberMapper;
@@ -48,7 +48,7 @@ class MemberControllerTest {
         this.mockMvc = MockMvcBuilders
                 .standaloneSetup(memberController)
                 .addFilters(new CharacterEncodingFilter("UTF-8", true))
-                .setControllerAdvice(ApiExceptionHandler.class)
+				.setControllerAdvice(MemberException.class)
                 .alwaysDo(print())
                 .build();
     }
@@ -58,7 +58,7 @@ class MemberControllerTest {
     void createMember() throws Exception {
         //given
         AddMemberFormDto form = TestData.mockAddMemberFormDto;
-        String mockFormData = TestData.MockMemberFormString;
+        String mockFormData = TestData.MockMemberFormString; // String mockFormData = "memberId=test123&password=!23Qwe&name=....."
         AddMemberCommand cmd = TestData.mockAddMemberCommand;
         Member member = TestData.mockMember;
 

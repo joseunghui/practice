@@ -36,7 +36,7 @@ public class AddMemberApiController {
         // 비밀번호 암호화해서 저장, 생년월일 타입 변경
         AddMemberCommand command = addMemberMapper.dtoToCommand(form, pwEnc);
         // 가입 실행
-        Member member = addMemberCommandService.addMember(command);
+        addMemberCommandService.addMember(command);
 
         return new ResponseEntity<>(
                 getSuccessHeaders(),

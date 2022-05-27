@@ -1,5 +1,7 @@
 package com.seung.practice.member.application.internal.commandservice;
 
+import com.seung.practice.common.exceptions.ErrorCode;
+import com.seung.practice.common.exceptions.MemberException;
 import com.seung.practice.member.domain.model.aggregates.Member;
 import com.seung.practice.member.domain.model.commands.ModifyMemberCommand;
 import com.seung.practice.member.repository.MemberRepository;
@@ -24,7 +26,7 @@ public class ModifyMemberCommandService {
 
         // 검증 2 -> 회원 아이디는 변경 불가
         if (!member.get().getMemberId().equals(memberId)) {
-            throw new IllegalStateException("회원 아이디는 변경이 불가능 합니다.");
+            throw new MemberException(ErrorCode.ID_UNCHANGEABLE);
         } else {
             // 회원 아이디가 동일하다면 기존 회원 정보를 삭제
             memberRepository.delete(member.get());
@@ -35,7 +37,7 @@ public class ModifyMemberCommandService {
         Optional<Member> member = memberRepository.findByMemberId(memberId);
 
         if (!member.isPresent()) {
-            throw new IllegalStateException("존재하지 않는 회원 아이디 입니다.");
+            throw new MemberException(ErrorCode.USER_NOT_FOUND);
         }
     }
 
