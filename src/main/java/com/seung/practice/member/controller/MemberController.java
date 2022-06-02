@@ -10,16 +10,12 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 public class MemberController {
 
@@ -35,9 +31,17 @@ public class MemberController {
 	
 	// front-end 연동 테스트 - 성공!
 	@GetMapping("/api/hello")
-	public @ResponseBody
-	String test() {
+	public String test() {
 		return "Hello, world!";
+	}
+
+	@GetMapping("/api/members/add")
+	public @ResponseBody
+	void addMember() {
+	}
+	@GetMapping("/api/members/login")
+	public @ResponseBody
+	void loginMember() {
 	}
 
 	// 회원가입 페이지로 이동

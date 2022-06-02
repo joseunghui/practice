@@ -41,9 +41,9 @@ public class DeleteMemberCommandServiceTest {
 		// 회원 정보 일치하는지 확인
 		Assertions.assertThat(actualMember)
 				.isEqualTo(deleteMemberCommandService.getMember(actualMember.getMemberId()).get());
-		
+
 		// 회원 삭제 실행
-		
+
 
 	}
 }
