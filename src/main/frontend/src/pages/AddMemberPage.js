@@ -1,10 +1,11 @@
-// add-member-page
-import React from "react";
+import React from 'react';
 
 const AddMemberPage = () => {
     return (
-        <>왜 아무것도 안뜨냐고</>
-    )
+        <div>
+            <h2>This is AddMemberPage!!</h2>
+        </div>
+    );
 };
 
 export default AddMemberPage;

@@ -1,8 +1,11 @@
-// member-list-page
-import React from "react";
+import React from 'react';
 
 const MemberListPage = () => {
-    return <div>member list</div>
+    return (
+        <div>
+            <h2>This is MemberListPage!!</h2>
+        </div>
+    );
 };
 
 export default MemberListPage;

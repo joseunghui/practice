@@ -1,9 +1,11 @@
-// login-page
-import React from "react";
-import axios from "axios";
+import React from 'react';
 
 const LoginPage = () => {
-    return <div>login</div>
+    return (
+        <div>
+            <h2>This is LoginPage!!</h2>
+        </div>
+    );
 };
 
 export default LoginPage;
