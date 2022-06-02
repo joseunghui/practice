@@ -33,6 +33,6 @@ out/
 /nbdist/
 /.nb-gradle/
 
-### VS Code ###
-.vscode/
-/src/main/generated/
+#### VS Code ###
+#.vscode/
+#/src/main/generated/
