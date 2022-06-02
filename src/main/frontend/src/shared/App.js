@@ -7,9 +7,9 @@ class App extends Component {
         return (
             <div>
                 <Route exact path="/" component={Home} />
-                <Route path="/api/members" component={MemberListPage} />
-                <Route path="/api/members/login" component={LoginPage} />
-                <Route path="/api/members/add" component={AddMemberPage} />
+                <Route exact path="/api/members" component={MemberListPage} />
+                <Route exact path="/api/members/login" component={LoginPage} />
+                <Route exact path="/api/members/add" component={AddMemberPage} />
             </div>
         );
     }
