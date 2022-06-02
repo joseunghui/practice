@@ -18,15 +18,20 @@ public class DeleteMemberCommandService {
     // 회원 탈퇴 전 기존 회원 확인
     public Optional<Member> getMember(String memberId) {
         Optional<Member> member = memberRepository.findByMemberId(memberId);
+		
+		// 기존 회원 인지 확인
+		validateUserNotFound(member);
 
-        // 검증 -> 존재하지 않는 아이디
-        if (!member.isPresent()) {
-            throw new MemberException(ErrorCode.USER_NOT_FOUND);
-        }
         return member;
     }
+	// 검증 -> 존재하지 않는 아이디
+	private void validateUserNotFound(Optional<Member> member) {
+		memberRepository.findByMemberId(member.get().getMemberId()).ifPresent(m -> {
+			throw new MemberException(ErrorCode.USER_NOT_FOUND);
+		});
+	}
 
-    // 삭제 실행
+	// 삭제 실행
     public void deleteMember(Optional<Member> member) {
         memberRepository.delete(member.get());
     }

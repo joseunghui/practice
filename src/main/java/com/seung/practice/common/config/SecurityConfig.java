@@ -26,6 +26,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.csrf().disable()       //  csrf 보안토큰 처리 해제
 				//  세션 사용하지 않음. (토큰 인증 기반)
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//				.and()
+//				.authorizeRequests()
+//					.antMatchers("/api/hello").permitAll()
 				.and()
 				.addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
 						UsernamePasswordAuthenticationFilter.class);
