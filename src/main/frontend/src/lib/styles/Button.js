@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import palette from '../../lib/styles/Palette';
+import palette from './Palette';
 
 // button styling
 const StyledButton = styled.button`
@@ -8,14 +8,17 @@ const StyledButton = styled.button`
   border-radius: 4px;
   font-size: 1rem;
   font-weight: bold;
+  
+  margin: 10px; 
   padding: 0.25rem 1rem;
+  
   color: white;
   outline: none;
   cursor: pointer;
-  
-  background: ${palette.orange[4]};
+
+  background: ${palette.gray[5]};
   &:hover {
-    background: ${palette.orange[3]};
+    background: ${palette.teal[8]};
   }
 `;
 // Button 에 받아오는 props 를 모두 styledButton 에 전달한다는 의미

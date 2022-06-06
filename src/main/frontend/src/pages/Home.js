@@ -1,7 +1,8 @@
 import React from 'react';
-import Button from "../components/common/Button";
+import Button from "../lib/styles/Button";
 
 const Home = () => {
+    console.log("여기는 Home, 기본화면!");
     return (
         <>
             <div>

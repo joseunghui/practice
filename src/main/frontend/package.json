@@ -1,7 +1,8 @@
 {
   "name": "frontend",
   "version": "0.1.0",
-  "private": false,
+  "private": true,
+  "proxy": "http://localhost:8080",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
@@ -20,10 +21,10 @@
     "styled-components": "^5.3.5",
     "web-vitals": "^2.1.4"
   },
-  "proxy": "http://localhost:8080",
+
   "scripts": {
-    "start": "cross-env NODE_PATH=src react-scripts start",
-    "build": "cross-env NODE_PATH=src react-scripts build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
