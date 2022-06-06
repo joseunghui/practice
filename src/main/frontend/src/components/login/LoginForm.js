@@ -2,27 +2,39 @@ import React, {useState} from "react";
 import AuthFormBlock from "../../lib/styles/FormBlock";
 import StyledInput from "../../lib/styles/InputStyle";
 import RightBtn from "../../lib/styles/RightBtn";
+import axios from "axios";
+import {Link} from "react-router-dom";
+import Route from "react-router-dom/es/Route";
 
 const LoginForm = () => {
 
-    const [values, setValuse] = useState({
+    const [values, setValues] = useState({
         // 변수 값 설정 -> values 로 묶기
         memberId: "",
-        password: '',
+        password: "",
     });
 
     const onchangeInput = (e) => {
         // 값 입력 시 values 값 변경
         const {name, value} = e.target;
-        setValuse({...values, [name]: value});
+        setValues({...values, [name]: value});
     };
 
     const onclickBtn = (e) => {
         // submit
         e.preventDefault();
-        
-        /* 확인 코드 -> 추후 삭제 */
-        console.log("로그인 버튼 클릭~ -> " + values.memberId + values.password);
+
+        axios({
+            method: 'post',
+            url: '/api/members/login',
+            withCredentials: true,
+            params: {
+                memberId : values.memberId,
+                password: values.password,
+            }
+        }).then((res) => {
+            document.location.href = '/';
+        }).catch((Error) => { console.log(Error)});
     }
 
     return (
@@ -45,7 +57,7 @@ const LoginForm = () => {
                     onChange={onchangeInput}
                 />
 
-                <RightBtn onClick={onclickBtn}>로그인~</RightBtn>
+                <RightBtn onClick={onclickBtn}>로그인</RightBtn>
             </form>
 
         </AuthFormBlock>

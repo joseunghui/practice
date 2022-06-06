@@ -2,20 +2,46 @@ import React from 'react';
 import Button from "../lib/styles/Button";
 
 const Home = () => {
-    console.log("여기는 Home, 기본화면!");
+
+    const onClickLoginBtn = (e) => {
+        document.location.href = "/api/members/login";
+    }
+
+    const onClickAddBtn = (e) => {
+        document.location.href = "api/members/add";
+    }
+
+    const onClickMemberListBtn = (e) => {
+        document.location.href = "/api/members";
+    }
+
     return (
         <>
             <div>
-                <Button>로그인</Button>
+                <Button onClick={onClickLoginBtn}>로그인</Button>
             </div>
 
             <div>
-                <Button>회원가입</Button>
+                <Button onClick={onClickAddBtn}>회원가입</Button>
             </div>
 
             <div>
-                <Button>회원목록</Button>
+                <Button onClick={onClickMemberListBtn}>회원목록</Button>
             </div>
+
+            {/*
+            <div>
+                <Button onClick={document.location.href = "/api/members/login"}>로그인</Button>
+            </div>
+
+            <div>
+                <Button onClick={document.location.href = "/api/members/add"}>회원가입</Button>
+            </div>
+
+            <div>
+                <Button onClick={document.location.href = "/api/members"}>회원목록</Button>
+            </div>
+            */}
         </>
     );
 };
