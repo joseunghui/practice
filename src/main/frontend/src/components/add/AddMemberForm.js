@@ -59,12 +59,6 @@ const AddMemberForm = () => {
                 <StyledInput name="name" placeholder="이름" onChange={onchangeInput} />
 
                 <StyledInput name="email" placeholder="이메일" type="email" onChange={onchangeInput} />
-
-                <StyledInput type="radio">
-                    <label>남</label>
-                    <label>여</label>
-                </StyledInput>
-
                 <StyledInput name="gender" placeholder="성별" onChange={onchangeInput} />
                 <StyledInput name="phone" placeholder="전화번호" onChange={onchangeInput} />
                 <StyledInput name="birth" placeholder="생년월일" type="date" onChange={onchangeInput} />
