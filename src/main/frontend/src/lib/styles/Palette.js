@@ -1,5 +1,5 @@
 // source: https://yeun.github.io/open-color/
-
+// 사용할 색상 팔레트 가져오기~!
 const palette = {
     orange: [
         '#ffe8cc',

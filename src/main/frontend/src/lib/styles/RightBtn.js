@@ -21,6 +21,7 @@ const StyledRightButton = styled.button`
     background: ${palette.teal[8]};
   }
 `;
+
 // Button 에 받아오는 props 를 모두 styledButton 에 전달한다는 의미
 const RightBtn = (props) => {
     return <StyledRightButton {...props} />;
