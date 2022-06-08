@@ -3,11 +3,8 @@ import AuthFormBlock from "../../lib/styles/FormBlock";
 import StyledInput from "../../lib/styles/InputStyle";
 import RightBtn from "../../lib/styles/RightBtn";
 import axios from "axios";
-import {Link} from "react-router-dom";
-import Route from "react-router-dom/es/Route";
 
 const LoginForm = () => {
-
     const [values, setValues] = useState({
         // 변수 값 설정 -> values 로 묶기
         memberId: "",
