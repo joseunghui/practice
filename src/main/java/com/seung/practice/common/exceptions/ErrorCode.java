@@ -11,14 +11,13 @@ public enum ErrorCode {
 	EXPIRED_CODE(400, "C003", "Expired Code"),
 	INTER_SERVER_ERROR(500,"C004" , "Inter Server Error"),
 
-	// aws
+	// aws 관련 에러
 	AWS_ERROR(400, "A001", "aws client error"),
 
-	 // member
+	 // member API 관련 에러
 	USER_EXISTS(6000, "6000", "Already User exists"),
 	PASSWORD_NOT_MATCH(6001, "6001", "Password is not correct"),
 	ID_UNCHANGEABLE(6002, "6002", "Unchangeable user Id"),
-
 	USER_NOT_FOUND(6003, "6003", "User not found");
 
 	private final int status;
