@@ -19,7 +19,7 @@ const AddMemberForm = () => {
         city: "",
         street: "",
         zipcode: "",
-    });
+    }); // TODO : 따로 빼야함
 
     const onchangeInput = (e) => {
         // 값 입력 시 values 값 변경
