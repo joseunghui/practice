@@ -39,10 +39,6 @@ public class KakaoApiService {
 
 			bw.write(sb.toString());
 			bw.flush();
-			
-/*			확인 코드
-			int responseCode = conn.getResponseCode();
-			System.out.println("responseCode-1 : " + responseCode);*/
 
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String line = "";
@@ -77,10 +73,6 @@ public class KakaoApiService {
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("POST");
 			conn.setRequestProperty("Authorization", "Bearer " + access_token);
-
-/*			확인 코드
-			int responseCode = conn.getResponseCode();
-			System.out.println("responseCode-2 : " + responseCode);*/
 
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String line = "";
