@@ -5,8 +5,8 @@ import RightBtn from "../../lib/styles/RightBtn";
 import axios from "axios";
 
 const LoginForm = () => {
+
     const [values, setValues] = useState({
-        // 변수 값 설정 -> values 로 묶기
         memberId: "",
         password: "",
     });
