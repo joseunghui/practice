@@ -47,7 +47,7 @@ const AddMemberForm = () => {
                 zipcode: values.zipcode,
             }
         }).then(() => {
-            document.location.href = "/";
+            document.location.href = "/";  // TODO -> 추후 변경
         }).catch((Error) => { console.log(Error)});
     }
 
