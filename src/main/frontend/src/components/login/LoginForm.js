@@ -40,9 +40,6 @@ const LoginForm = () => {
     return (
         <AuthFormBlock>
             <form>
-                {/* autocomplete 속성 >> 인풋에 자동완성하는 속성
-                 username 은 사용자 이름 , new-password 는 보통 비밀번호 자동완성 막기 위해서 새로운 비밀번호나 비밀번호 확인란에 들어간다는뎅 ㅎ..
-                 머 일단 책은 이렇고 나는 나중에 보고 current-password 가 더 맞을거 같아서 임의로 바꿨음. */}
                 <StyledInput
                     autoComplete="username"
                     name="memberId"
