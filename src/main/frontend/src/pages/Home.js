@@ -28,20 +28,6 @@ const Home = () => {
             <div>
                 <Button onClick={onClickMemberListBtn}>회원목록</Button>
             </div>
-
-            {/*
-            <div>
-                <Button onClick={document.location.href = "/api/members/login"}>로그인</Button>
-            </div>
-
-            <div>
-                <Button onClick={document.location.href = "/api/members/add"}>회원가입</Button>
-            </div>
-
-            <div>
-                <Button onClick={document.location.href = "/api/members"}>회원목록</Button>
-            </div>
-            */}
         </>
     );
 };
