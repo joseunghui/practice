@@ -32,6 +32,7 @@ public class ModifyMemberCommandService {
             memberRepository.delete(member.get());
         }
     }
+
     // 검증 -> 존재하지 않는 아이디
     private void validateNonexistentMember(String memberId) {
         Optional<Member> member = memberRepository.findByMemberId(memberId);
@@ -40,9 +41,8 @@ public class ModifyMemberCommandService {
             throw new MemberException(ErrorCode.USER_NOT_FOUND);
         }
     }
-
-
-    // 회원 수정
+	
+    // 회원 수정 실행
     public Member modifyMember(ModifyMemberCommand command) {
         Member member = new Member(command);
         memberRepository.save(member);
