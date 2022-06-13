@@ -29,7 +29,6 @@ public class ModifyMemberApiController {
     private final ModifyMemberMapper modifyMemberMapper;
     private final PasswordEncoder pwEnc;
 
-
     // 회원 수정 : modify
     @PostMapping(MODIFY_MEMBER)
     public ResponseEntity modify(
