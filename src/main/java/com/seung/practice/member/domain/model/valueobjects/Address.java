@@ -8,6 +8,7 @@ import javax.persistence.Embeddable;
 @Getter
 public class Address {
 
+	// 주소를 3개로 나눠서 입력 후 하나의 Address 로 저장 
 	private String city;
 	private String street;
 	private String zipcode;
