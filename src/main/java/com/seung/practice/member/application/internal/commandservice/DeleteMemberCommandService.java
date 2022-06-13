@@ -12,7 +12,6 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class DeleteMemberCommandService {
-
     private final MemberRepository memberRepository;
 
     // 회원 탈퇴 전 기존 회원 확인
